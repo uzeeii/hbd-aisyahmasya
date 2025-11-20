@@ -3,35 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>buat masyaa</title>
+  <title>Happy Level Up, Aisyah!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(135deg, #ffe6f2, #ffd6eb, #fff0f8);
       color: #4b4b4b;
       font-family: 'Poppins', sans-serif;
       text-align: center;
-      padding: 40px;
-      overflow-x: hidden;
+      padding: 0;
+      margin: 0;
+      overflow: hidden; /* Prevent scrollbar from falling hearts */
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
 
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
-    h1, h3, h5, h6, p, img {
-      animation: fadeInUp 1.2s ease forwards;
+    @keyframes slideInUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .container {
+      max-width: 900px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 25px;
+      box-shadow: 0 0 40px rgba(255, 192, 203, 0.6);
+      backdrop-filter: blur(8px);
+      animation: fadeIn 1.5s ease-out;
+      position: relative;
+      z-index: 1;
+      overflow-y: auto; /* Allow scrolling for content that exceeds height */
+      max-height: 90vh; /* Limit height to allow hearts to be seen */
+    }
+
+    h1, h3, h5, h6, p {
+      animation: slideInUp 1s ease forwards;
+      opacity: 0; /* Hidden by default for animation */
+      animation-delay: var(--delay); /* Custom delay for each element */
     }
 
     h1 {
       color: #ff66b2;
-      text-shadow: 0 0 10px rgba(255, 102, 178, 0.4);
+      text-shadow: 0 0 15px rgba(255, 102, 178, 0.6);
       margin-bottom: 20px;
+      font-size: 3em;
     }
 
     h3 {
       color: #ff8dc7;
-      margin-top: 50px;
+      margin-top: 30px;
+      font-size: 1.8em;
     }
 
     b {
@@ -74,31 +111,55 @@
       }
     }
 
-    img {
-      border-radius: 20px;
-      margin: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s;
+    .gift-icon {
+      width: 100px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      transition: transform 0.2s ease;
     }
 
-    img:hover {
-      transform: scale(1.05);
+    .gift-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .clickable-text {
+      font-size: 1.2em;
+      color: #ff4fa3;
+      cursor: pointer;
+      margin-top: 20px;
+      text-decoration: underline;
+    }
+
+    .photo-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap; /* Allows photos to wrap in smaller screens */
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .photo-item img {
+      width: 100%; /* Make image responsive */
+      max-width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, opacity 0.5s ease;
+      animation: slideInUp 1s ease forwards;
+      opacity: 0; /* Hide by default for sequential display */
     }
 
     audio {
       margin-top: 20px;
       border-radius: 30px;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
-    .birthday-message {
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 0 25px rgba(255, 192, 203, 0.5);
-      display: inline-block;
-      margin-top: 20px;
-      backdrop-filter: blur(6px);
-      animation: fadeInUp 1.5s ease forwards;
+    /* Styling for the hidden elements */
+    #screen2, #screen3, #screen4, #screen5 {
+      display: none;
     }
   </style>
 </head>
@@ -106,75 +167,187 @@
 <body>
   <div class="hearts"></div>
 
-  <h1>Happy Birthday, Aisyah 🎂😉🤭</h1>
-  <audio autoplay src="elijah.mp3" controls></audio> 
-  <h1>PLAY PLEASEEEEE</h1>
-    
-  <div class="birthday-message">
-    <p><h5>from : abunsungkar/usamah</h5></p>
-    <p><b>danger</b>, kata2 aku mungkin bakal alay baget maaff TvT</p>
+  <div id="screen1" class="container">
+    <h1 style="--delay: 0s;">Happy Level Up Aisyah Cantikk! 🎂✨</h1>
+    <p style="--delay: 0.8s; font-size: 1.2em;">Klik di bawah ini:</p>
+    <img src="https://em-content.zobj.net/source/microsoft-teams/337/wrapped-gift_1f381.png" alt="Gift Box" class="gift-icon" onclick="showScreen2()">
+  </div>
 
-    <p>........</p>
-    <p>......................................</p>
-    <p>........................</p>
-    <p>............</p>
+  <div id="screen2" class="container">
+    <h1 style="--delay: 0s;">PLAY PLEASEEEE</h1>
+    <audio id="birthdayAudio" src="elijah.mp3" controls loop></audio>
+    <p class="clickable-text" onclick="showScreen3()">Klik kotak ini !</p>
+  </div>
 
-    <p>
-      Hai Syaa... hari ini harinya kamuuu :>, dan aku cumaaa mau bilang gini ajaa — <b>selamat ulang tahun!</b> 🎉  
-      Aku nggak tau harus mulai dari mana, tapi aku harap kamu tau sebrapa berharganya kamu buat orang-orang di sekitar kamu 
-      <h6>(termasuk aku 😳 ).</h6>
+  <div id="screen3" class="container">
+    <h1 style="--delay: 0s;">Happy Birthday, Aisyah 🎂😉🤭</h1>
+    <p style="--delay: 0.2s;"><h5>from : abunsungkar/usamah</h5></p>
+    <p style="--delay: 0.4s;"><b>danger</b>, kata2 aku mungkin bakal alay baget maaff TvT</p>
+    <p style="--delay: 0.6s;">........</p>
+    <p style="--delay: 0.8s;">......................................</p>
+    <p style="--delay: 1s;">........................</p>
+    <p style="--delay: 1.2s;">............</p>
+    <p style="--delay: 1.4s;">
+      Hai Syaa... hari ini harinya kamuuu :>, dan aku cumaaa mau bilang gini ajaa — <b>selamat ulang tahun!</b> 🎉
+      Aku nggak tau harus mulai dari mana, tapi aku harap kamu tau sebrapa berharganya kamu buat orang-orang di sekitar kamu
+      <h6 style="--delay: 1.6s;">(termasuk aku 😳 ).</h6>
     </p>
-    <p>
-      Kamu tu aneh tauu soalnya, kadang nyebelin, kadang lucu banget, kadang bikin aku mikir “kok bisa ya aku salting gini?”.  
+    <p style="--delay: 1.8s;">
+      Kamu tu aneh tauu soalnya, kadang nyebelin, kadang lucu banget, kadang bikin aku mikir “kok bisa ya aku salting gini?”.
       Tpi jujur, tiap kalo kamu muncul, semuanya jadi lebih ringan aja ... Kayak gtu lah TvT.
     </p>
-    <p>
-      Aku tau kita bukan apa-apa yang “jelas”, tapi aku juga tau kalau aku bersyukur pernah ketemu kamu.  
-      Kamu tuu orang pertama yang berhasil bikin aku nyaman, walaupun suka ngambek (tapi gapapa, aku seneng kamu gtuu, soalnya aku jadi tau kalo aku salah).  
+    <p style="--delay: 2s;">
+      Aku tau kita bukan apa-apa yang “jelas”, tapi aku juga tau kalau aku bersyukur pernah ketemu kamu.
+      Kamu tuu orang pertama yang berhasil bikin aku nyaman, walaupun suka ngambek (tapi gapapa, aku seneng kamu gtuu, soalnya aku jadi tau kalo aku salah).
       Jadi hari ini, aku cuma mau kamu senyum, jangan sedih - sedihh, dan nikmatin hari kamu sepuasnya.
     </p>
-    <p>
-      <b>Semoga semua hal yang kamu pengenin pelan-pelan datangin kamu, tanpa harus kamu capek ngejar.</b>  
+    <p style="--delay: 2.2s;">
+      <b>Semoga semua hal yang kamu pengenin pelan-pelan datangin kamu, tanpa harus kamu capek ngejar.</b>
       Kamu pantas dapet hal-hal baik, Syaa.....dan aku harap kamu inget itu, bahkan di hari-hari kamu ngerasa sendirian.
     </p>
-    <p>kamuu jangan takut aku ninggalin kamu syaa, aku ga mau ninggalin kamuu, masa aku udah nyaman, tapi malah aku tinggalin</p>
-    <p>
+    <p style="--delay: 2.4s;">kamuu jangan takut aku ninggalin kamu syaa, aku ga mau ninggalin kamuu, masa aku udah nyaman, tapi malah aku tinggalin</p>
+    <p style="--delay: 2.6s;">
       Jadi sekali lagi, selamat ulang tahun ya, Aisyah..ee my loff yang lucu, imut, cantikk, suka ngambekk😜 🤗🥰❤️❤️
       Jangan lupa bahagia, dan… kalau bisa, tetep jangan lupa aku juga. 😳
     </p>
-    <p>maaf ya syaa, kalo aku cuma bisa ngasih ini, gak bisa ngasih yang lain, sebenernya aku mau...tapi aku bingung cara ngasi nyaa..maaff loff</p>
+    <p style="--delay: 2.8s;">maaf ya syaa, kalo aku cuma bisa ngasih ini, gak bisa ngasih yang lain, sebenernya aku mau...tapi aku bingung cara ngasi nyaa..maaff loff</p>
+    <p>TAPI GINI AJA, SEBUTIN SATU PERMINTAAN KAMU, APA AJAA... KALO AKU SANGGUP, AKU LAKUIN, TERSERAH MAU ANEH, APAPUN SYAA
+    </p>
+    <H3 style="--delay: 3s;">selamat yee <B>AISYAH AZMA KIRANA</B></H3>
+    <h1 style="--delay: 3.2s;"><s>15 tahun</s> <i>16 tahun</i></h1>
+    <br>
+    <img src="https://em-content.zobj.net/source/microsoft-teams/337/wrapped-gift_1f381.png" alt="Gift Box Large" class="gift-icon" style="width: 150px;" onclick="showScreen4()">
+    <p class="clickable-text" onclick="showScreen4()">Klik aku!</p>
   </div>
 
-  <H3>selamat yee  <B>AISYAH AZMA KIRANA</B></H3>
-  <h1><s>15 tahun</s> <i>16 tahun</i></h1>
+  <div id="screen4" class="container">
+    <p style="--delay: 0s; font-size: 1.5em; margin-bottom: 30px;"><b><i>picture ?</i></b></p>
+    <div class="photo-display" id="photoGallery">
+      </div>
+    <p class="clickable-text" style="margin-top: 30px;" onclick="showScreen5()">klik potonya baru klik ini buat Lanjut!... potonya ada banyak yaa</p>
+  </div>
 
-  <p><b><i>picture ?</i></b></p>
+  <div id="screen5" class="container">
+    <p style="--delay: 0s; font-size: 1.5em;">udah segituu ajaa, semoga kamu ceriaa teruss yaa, dan semogaa kamu suka syaa, byee</p>
+    <p class="clickable-text" style="--delay: 1s;" onclick="showFinalGreeting()">Klik lagi...</p>
+    <p id="finalGreeting" style="--delay: 2s; font-size: 2em; color: #ff4fa3; display: none;">Happy Birthday Aisyah Azma Kirana, love you ❤️❤️</p>
+  </div>
 
-  <img src="ai.png" width="500px">   
-  <img src="sya.png" width="500px">
-  <img src="ah.png" width="500px">    
-  <img src="az.png" width="500px">
-  <img src="ma.png" width="500px">    
-  <img src="ki.png" width="500px">
-  <img src="ra.png" width="500px">    
-  <img src="na.png" width="500px">
-  <img src="masya.png" width="500px">
-  <img src="poster.png" width="500px">
+  <script>
+    const heartsContainer = document.querySelector('.hearts');
+    const emojis = ['🫶', '🎂', '🥰', '❤️', '💖', '✨', '🎁'];
+    const photos = [
+      "ai.png",
+      "sya.png",
+      "ah.png",
+      "az.png",
+      "ma.png",
+      "ki.png",
+      "ra.png",
+      "na.png",
+      "masya.png",
+      "roblox.png",
+      "poster.png"
+    ];
+    let currentPhotoIndex = 0;
+    let audioPlayed = false;
 
- <script>
-  const heartsContainer = document.querySelector('.hearts');
-  const emojis = ['🫶','🎂','🥰','❤️'];
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = Math.random() * 25 + 15 + 'px';
-    heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-    heartsContainer.appendChild(heart);
-    setTimeout(() => { heart.remove(); }, 6000);
-  }
-  setInterval(createHeart, 300);
-</script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 25 + 15 + 'px';
+      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 6000);
+    }
+    setInterval(createHeart, 300);
+
+    function hideAllScreens() {
+      document.getElementById('screen1').style.display = 'none';
+      document.getElementById('screen2').style.display = 'none';
+      document.getElementById('screen3').style.display = 'none';
+      document.getElementById('screen4').style.display = 'none';
+      document.getElementById('screen5').style.display = 'none';
+    }
+
+    function showScreen1() {
+      hideAllScreens();
+      document.getElementById('screen1').style.display = 'block';
+    }
+
+    function showScreen2() {
+      hideAllScreens();
+      document.getElementById('screen2').style.display = 'flex'; // Use flex for centering
+      const audio = document.getElementById('birthdayAudio');
+      if (!audioPlayed) {
+        audio.play().catch(e => console.log("Audio play prevented:", e));
+        audioPlayed = true;
+      }
+    }
+
+    function showScreen3() {
+      hideAllScreens();
+      document.getElementById('screen3').style.display = 'block';
+      // Reset scroll to top for long messages
+      document.getElementById('screen3').scrollTop = 0;
+    }
+
+    function showScreen4() {
+      hideAllScreens();
+      document.getElementById('screen4').style.display = 'block';
+      currentPhotoIndex = 0; // Reset photo index
+      document.getElementById('photoGallery').innerHTML = ''; // Clear previous photos
+      displayNextPhoto();
+    }
+
+    function displayNextPhoto() {
+      const photoGallery = document.getElementById('photoGallery');
+      if (currentPhotoIndex < photos.length) {
+        const photoUrl = photos[currentPhotoIndex];
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('photo-item');
+        const img = document.createElement('img');
+        img.src = photoUrl;
+        img.alt = `Photo ${currentPhotoIndex + 1}`;
+        img.style.animationDelay = `${currentPhotoIndex * 0.3}s`; // Stagger animation
+        imgContainer.appendChild(img);
+        photoGallery.appendChild(imgContainer);
+
+        // Animate the photo in
+        setTimeout(() => {
+          img.style.opacity = '1';
+          img.style.transform = 'translateY(0)';
+        }, currentPhotoIndex * 300 + 50); // Small delay to ensure display is block
+
+        currentPhotoIndex++;
+      } else {
+        // All photos displayed, prepare for next screen
+        // The "Lanjut!" button is already visible and handles navigation
+      }
+    }
+
+    document.getElementById('screen4').addEventListener('click', (event) => {
+      // Only advance photo if clicked within the photo gallery, not the "Lanjut" button itself
+      if (event.target.tagName === 'IMG' || event.target.classList.contains('photo-display')) {
+        displayNextPhoto();
+      }
+    });
+
+    function showScreen5() {
+      hideAllScreens();
+      document.getElementById('screen5').style.display = 'block';
+      document.getElementById('finalGreeting').style.display = 'none'; // Hide final greeting initially
+    }
+
+    function showFinalGreeting() {
+      document.getElementById('finalGreeting').style.display = 'block';
+      document.getElementById('finalGreeting').style.animation = 'slideInUp 1s ease forwards';
+    }
+
+    // Initialize with the first screen
+    showScreen1();
+  </script>
 </body>
 </html>
